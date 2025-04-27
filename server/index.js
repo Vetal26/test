@@ -3,7 +3,7 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import routes from './routes/index.js'
 
-const PORT = 8080
+const PORT = process.env.PORT
 const app = express()
 
 app.use(cors());

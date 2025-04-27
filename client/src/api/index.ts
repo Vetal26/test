@@ -1,6 +1,6 @@
 import { PaginatedItems, TItem } from '../types'
 
-const BACKEND_URL = 'http://localhost:8080/api'
+const BACKEND_URL = `/api`
 
 const request = async (
   url = '',
