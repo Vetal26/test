@@ -50,4 +50,9 @@
   display: flex;
   align-items: center;
   cursor: move;
+  background-color: white;
+}
+
+.checked {
+  background-color: #e3f2fd;
 }

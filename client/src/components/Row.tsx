@@ -35,11 +35,10 @@ const Row = ({ data, index, style, moveRow, toggleSelect }: TItemProps) => {
 
   return (
     <div
-      className="item"
+      className={`item ${item.isChecked ? 'checked' : ''}`}
       ref={ref}
       style={{
         ...style,
-        backgroundColor: item.isChecked ? '#e3f2fd' : 'white',
         opacity: isDragging ? 0.5 : 1,
       }}
     >
