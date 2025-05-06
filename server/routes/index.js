@@ -3,8 +3,8 @@ import listController from '../controllers/listController.js';
 
 const router = Router();
 
-router.get('/api/items', listController.getList)
-router.put('/api/items', listController.updateItem)
-router.post('/api/items/reorder', listController.reorderItem)
+router.get('/items', listController.getList.bind(listController))
+router.put('/items', listController.updateItem.bind(listController))
+router.put('/items/reorder', listController.reorderItem.bind(listController))
 
 export default router

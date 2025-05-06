@@ -133,29 +133,22 @@ const List = () => {
     }
   }
 
-  const moveRow = useCallback(async (fromIndex: number, toIndex: number) => {
-    if (fromIndex === toIndex) return
+  const moveRow = useCallback(
+    async (fromIndex: number, toIndex: number) => {
+      if (fromIndex === toIndex) return
 
-    setList((prev) => {
-      const newItems = [...prev]
+      const newItems = [...list]
       const [movedItem] = newItems.splice(fromIndex, 1)
       newItems.splice(toIndex, 0, movedItem)
 
-      if (toIndex > 0 && toIndex !== newItems.length - 1) {
-        newItems[toIndex].order =
-          (newItems[toIndex - 1].order + newItems[toIndex + 1].order) / 2
-      } else if (toIndex === 0) {
-        newItems[toIndex].order = toIndex
-      } else {
-        newItems[toIndex].order =
-          (newItems[toIndex - 1].order + newItems.length) / 2
-      }
-
-      api.reorderItem('/items/reorder', { item: newItems[toIndex] })
-
-      return newItems
-    })
-  }, [])
+      setList(newItems)
+      api.reorderItem('/items/reorder', {
+        currentItemId: newItems[toIndex].id,
+        nextItemId: newItems[toIndex + 1].id,
+      })
+    },
+    [list],
+  )
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -177,7 +170,7 @@ const List = () => {
           >
             {({ index, style }) => (
               <Row
-                data={list}
+                item={list[index]}
                 index={index}
                 style={style}
                 moveRow={moveRow}

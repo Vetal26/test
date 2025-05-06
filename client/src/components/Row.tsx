@@ -3,15 +3,14 @@ import { useDrag, useDrop } from 'react-dnd'
 import { TItem } from '../types'
 
 type TItemProps = {
-  data: TItem[]
+  item: TItem
   index: number
   style: React.CSSProperties
   moveRow: (fromIndex: number, toIndex: number) => void
   toggleSelect: (id: number) => void
 }
-const Row = ({ data, index, style, moveRow, toggleSelect }: TItemProps) => {
+const Row = ({ item, index, style, moveRow, toggleSelect }: TItemProps) => {
   const checkboxId = useId()
-  const item = data[index]
   const ref = useRef<HTMLDivElement>(null)
 
   const [, drop] = useDrop({

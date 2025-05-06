@@ -1,6 +1,6 @@
 import { PaginatedItems, TItem } from '../types'
 
-const BACKEND_URL = `/api`
+const BACKEND_URL = `http://localhost:8080/api`
 
 const request = async (
   url = '',
@@ -28,6 +28,8 @@ export const api = {
     request(BACKEND_URL, path, 'GET', null),
   updateItem: async (path: string, body: { item: TItem }) =>
     request(BACKEND_URL, path, 'PUT', JSON.stringify(body)),
-  reorderItem: async (path: string, body: { item: TItem }) =>
-    request(BACKEND_URL, path, 'POST', JSON.stringify(body)),
+  reorderItem: async (
+    path: string,
+    body: { currentItemId: TItem['id']; nextItemId: TItem['id'] | undefined },
+  ) => request(BACKEND_URL, path, 'PUT', JSON.stringify(body)),
 }
